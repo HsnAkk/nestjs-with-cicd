@@ -1,0 +1,26 @@
+name: Integration
+# on pull request the code will be merged to main branch
+on: 
+  pull_request:
+    branches: 
+      - main
+# after merging to main, which jobs will be handled
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build app
+        run: npm run build
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit tests
+        run: npm run test
